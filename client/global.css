@@ -1,0 +1,282 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * CodePilot AI Design System
+   * Premium dark theme with neon gradients
+   */
+  :root {
+    /* Base colors */
+    --background: 220 13% 9%;
+    --foreground: 220 14% 96%;
+
+    --card: 220 13% 11%;
+    --card-foreground: 220 14% 96%;
+
+    --popover: 220 13% 11%;
+    --popover-foreground: 220 14% 96%;
+
+    /* Primary brand colors */
+    --primary: 217 91% 60%;
+    --primary-foreground: 220 14% 4%;
+
+    --secondary: 220 13% 18%;
+    --secondary-foreground: 220 14% 96%;
+
+    --muted: 220 13% 15%;
+    --muted-foreground: 220 9% 64%;
+
+    --accent: 220 13% 18%;
+    --accent-foreground: 220 14% 96%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 13% 18%;
+    --input: 220 13% 18%;
+    --ring: 217 91% 60%;
+
+    /* CodePilot AI Brand Colors - Neon Palette */
+    --neon-blue: 217 91% 60%; /* Electric Blue */
+    --neon-purple: 263 83% 66%; /* Electric Purple */
+    --neon-pink: 316 73% 69%; /* Electric Pink */
+    --neon-green: 142 76% 73%; /* Electric Green */
+    --neon-cyan: 180 78% 60%; /* Electric Cyan */
+
+    /* Dark theme variants */
+    --dark: 220 13% 9%;
+    --dark-lighter: 220 13% 15%;
+    --dark-darker: 220 13% 4%;
+
+    /* Gray scale */
+    --gray-50: 220 14% 96%;
+    --gray-100: 220 14% 93%;
+    --gray-200: 220 13% 87%;
+    --gray-300: 220 14% 74%;
+    --gray-400: 220 9% 64%;
+    --gray-500: 220 9% 46%;
+    --gray-600: 220 14% 34%;
+    --gray-700: 220 13% 26%;
+    --gray-800: 220 13% 18%;
+    --gray-900: 220 13% 11%;
+    --gray-950: 220 13% 4%;
+
+    --radius: 0.75rem;
+  }
+
+  /* Light mode overrides (not used for CodePilot but kept for compatibility) */
+  .light {
+    --background: 220 14% 96%;
+    --foreground: 220 13% 9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 13% 9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 13% 9%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 220 14% 96%;
+
+    --secondary: 220 14% 93%;
+    --secondary-foreground: 220 13% 9%;
+
+    --muted: 220 14% 93%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 220 14% 93%;
+    --accent-foreground: 220 13% 9%;
+
+    --border: 220 13% 87%;
+    --input: 220 13% 87%;
+    --ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv11", "ss01";
+    font-variation-settings: "opsz" 32;
+  }
+
+  /* Remove default margins and ensure full height */
+  html,
+  body,
+  #root {
+    @apply h-full;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-dark;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-neon-blue rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-neon-purple;
+  }
+}
+
+@layer components {
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+
+  .glass-dark {
+    @apply bg-black/20 backdrop-blur-xl border border-white/5;
+  }
+
+  /* Neon text effect */
+  .text-neon {
+    color: hsl(var(--neon-blue));
+    filter: drop-shadow(0 0 10px hsl(var(--neon-blue) / 0.8));
+  }
+
+  .text-neon-purple {
+    color: hsl(var(--neon-purple));
+    filter: drop-shadow(0 0 10px hsl(var(--neon-purple) / 0.8));
+  }
+
+  .text-neon-pink {
+    color: hsl(var(--neon-pink));
+    filter: drop-shadow(0 0 10px hsl(var(--neon-pink) / 0.8));
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink bg-clip-text text-transparent;
+  }
+
+  /* Animated gradient background */
+  .bg-animated-gradient {
+    @apply bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink;
+    background-size: 200% 200%;
+    animation: gradient-x 3s ease infinite;
+  }
+
+  /* Button variants */
+  .btn-neon {
+    @apply relative px-6 py-3 rounded-lg font-medium text-white bg-neon-blue shadow-neon-md transition-all duration-300;
+    @apply hover:shadow-neon-lg hover:scale-105;
+  }
+
+  .btn-neon::before {
+    @apply absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300;
+    content: "";
+    background: linear-gradient(
+      135deg,
+      hsl(var(--neon-blue) / 0.8),
+      hsl(var(--neon-purple) / 0.8)
+    );
+  }
+
+  .btn-neon:hover::before {
+    @apply opacity-40;
+  }
+
+  .btn-ghost-neon {
+    @apply relative px-6 py-3 rounded-lg font-medium text-neon-blue border border-neon-blue/30 transition-all duration-300;
+    @apply hover:bg-neon-blue/5 hover:border-neon-blue/60 hover:shadow-neon-sm;
+  }
+
+  /* Card components */
+  .card-glow {
+    @apply relative overflow-hidden rounded-xl border border-white/10;
+    @apply bg-gradient-to-br from-white/5 to-white/[0.02];
+    @apply backdrop-blur-sm shadow-lg;
+  }
+
+  .card-glow::before {
+    @apply absolute -inset-[2px] rounded-xl opacity-0 transition-opacity duration-500;
+    content: "";
+    background: linear-gradient(
+      45deg,
+      hsl(var(--neon-blue) / 0.3),
+      hsl(var(--neon-purple) / 0.3),
+      hsl(var(--neon-pink) / 0.3),
+      hsl(var(--neon-blue) / 0.3)
+    );
+    background-size: 200% 200%;
+    animation: gradient-x 3s ease infinite;
+    z-index: -1;
+  }
+
+  .card-glow:hover::before {
+    @apply opacity-60;
+  }
+
+  /* Section padding */
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-spacing {
+    @apply py-12 sm:py-16 lg:py-20 xl:py-24;
+  }
+
+  /* Container max widths */
+  .container-tight {
+    @apply max-w-4xl mx-auto;
+  }
+
+  .container-wide {
+    @apply max-w-7xl mx-auto;
+  }
+}
+
+@layer utilities {
+  /* Animation delays for staggered effects */
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+  .delay-400 {
+    animation-delay: 400ms;
+  }
+  .delay-500 {
+    animation-delay: 500ms;
+  }
+
+  /* Text size variants */
+  .text-hero {
+    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.9] tracking-tight;
+  }
+
+  .text-display {
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight;
+  }
+
+  .text-heading {
+    @apply text-2xl sm:text-3xl md:text-4xl font-bold leading-tight;
+  }
+
+  .text-subheading {
+    @apply text-lg sm:text-xl md:text-2xl font-medium leading-relaxed;
+  }
+}
